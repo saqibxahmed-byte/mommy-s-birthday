@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mommy 🌚💋</title>
+
+<style>
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#ffd1dc,#ffe6f0);
+overflow:hidden;
+transition:1s;
+}
+
+.page{
+display:none;
+height:100vh;
+width:100%;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+box-sizing:border-box;
+}
+
+.active{display:flex;}
+
+h1{font-size:26px;}
+button{
+padding:10px 20px;
+margin:10px;
+border:none;
+border-radius:20px;
+background:#ff4f81;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.dark{
+background:#111;
+color:white;
+}
+
+.fairy{
+position:absolute;
+top:0;
+width:100%;
+display:none;
+justify-content:space-around;
+}
+
+.light{
+width:15px;
+height:15px;
+background:yellow;
+border-radius:50%;
+box-shadow:0 0 20px yellow;
+animation:blink 1s infinite alternate;
+}
+
+@keyframes blink{
+from{opacity:0.3}
+to{opacity:1}
+}
+
+.balloon{
+position:absolute;
+bottom:-100px;
+width:30px;
+height:40px;
+border-radius:50%;
+animation:fly 6s linear forwards;
+}
+
+@keyframes fly{
+to{transform:translateY(-120vh);}
+}
+
+.card{
+width:250px;
+height:150px;
+background:white;
+border-radius:15px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:10px;
+cursor:pointer;
+transition:transform 0.6s;
+transform-style:preserve-3d;
+position:relative;
+}
+
+.card.flip{transform:rotateY(180deg);}
+
+.card .front, .card .back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:10px;
+box-sizing:border-box;
+border-radius:15px;
+}
+
+.back{
+transform:rotateY(180deg);
+background:#ffd1dc;
+}
+
+#letter{
+overflow-y:auto;
+height:80vh;
+background:white;
+color:black;
+border-radius:20px;
+padding:20px;
+}
+
+.cakebox{
+background:white;
+padding:20px;
+border-radius:20px;
+width:300px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+<h1>🎂</h1>
+<h2>hey mommy 🌚💋</h2>
+<h1 id="changingText">It's your special day</h1>
+<div id="choice" style="display:none;">
+<button onclick="goToLoading()">Yes</button>
+<button disabled>No</button>
+</div>
+</div>
+
+<!-- LOADING PAGE -->
+<div class="page" id="loading">
+<h2>Have a look preparing your surprise...</h2>
+</div>
+
+<!-- DARK PAGE -->
+<div class="page dark" id="darkPage">
+<div class="fairy" id="fairyLights"></div>
+<button onclick="turnOnLights()">Turn On Lights</button>
+<button onclick="decorate()">Decorate</button>
+<button onclick="flyBalloons()">Fly Balloons</button>
+<button onclick="goToCake()">Let's Cut The Cake</button>
+</div>
+
+<!-- CAKE PAGE -->
+<div class="page" id="cakePage">
+<div class="cakebox">
+<b>Drag across the cake to cut it</b>
+<p>Swipe through the highlighted area to complete the cut</p>
+<img src="https://i.imgur.com/4M7IWwP.png" width="200" id="cakeImg">
+</div>
+</div>
+
+<!-- WISH CARDS -->
+<div class="page" id="cardsPage">
+<h2>Wishes</h2>
+<div class="card" onclick="flip(this)">
+<div class="front">Tap Me</div>
+<div class="back">may your day be filled with laughter, love, and all the little moments that make life beautiful.😽💋</div>
+</div>
+
+<div class="card" onclick="flip(this)">
+<div class="front">Tap Me</div>
+<div class="back">may this birthday bring you closer to your dreams and fill your heart with endless happiness 🌚♥️</div>
+</div>
+
+<div class="card" onclick="flip(this)">
+<div class="front">Tap Me</div>
+<div class="back">May all your dreams come true and you always remain happy, may no one cast an evil eye on you. 🥹💗🧿</div>
+</div>
+
+<button onclick="goToLetter()">Open Final Message</button>
+</div>
+
+<!-- LETTER PAGE -->
+<div class="page" id="letterPage">
+<div id="letter">
+<h2>26 February 2026</h2>
+<h3>Happy 16th birthday (malkin) loondi ke baddu 🌚💗</h3>
+<p>
+Today is a very special day for you and for me🙈 Aaj ka din aapka bhot accha Jaye tathastu✋...
+(Your full paragraph yaha automatically scroll karega)
+</p>
+</div>
+</div>
+
+<script>
+
+// TEXT CHANGE SEQUENCE
+setTimeout(()=>{
+document.getElementById("changingText").innerText="So, I made something just for you";
+},2000);
+
+setTimeout(()=>{
+document.getElementById("changingText").innerText="Do you want to see what I made?";
+},7000);
+
+setTimeout(()=>{
+document.getElementById("choice").style.display="block";
+},10000);
+
+// PAGE SWITCH
+function goToLoading(){
+switchPage("page1","loading");
+setTimeout(()=>{
+switchPage("loading","darkPage");
+},3000);
+}
+
+function turnOnLights(){
+let fairy=document.getElementById("fairyLights");
+fairy.style.display="flex";
+for(let i=0;i<20;i++){
+let bulb=document.createElement("div");
+bulb.className="light";
+fairy.appendChild(bulb);
+}
+document.body.style.background="linear-gradient(135deg,#ffd1dc,#ffe6f0)";
+}
+
+function decorate(){
+let text=document.createElement("h1");
+text.innerText="🎉 HAPPY BIRTHDAY 🎉";
+document.getElementById("darkPage").appendChild(text);
+}
+
+function flyBalloons(){
+for(let i=0;i<20;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.style.left=Math.random()*100+"%";
+b.style.background=i%2==0?"pink":"red";
+document.body.appendChild(b);
+}
+}
+
+function goToCake(){switchPage("darkPage","cakePage");}
+
+document.getElementById("cakeImg").addEventListener("click",()=>{
+alert("Cake Cut! Now make your birthday wish 🎂");
+document.getElementById("cakeImg").style.filter="blur(4px)";
+setTimeout(()=>{switchPage("cakePage","cardsPage");},2000);
+});
+
+function flip(card){card.classList.toggle("flip");}
+
+function goToLetter(){switchPage("cardsPage","letterPage");}
+
+function switchPage(hide,show){
+document.getElementById(hide).classList.remove("active");
+document.getElementById(show).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>s
